@@ -18,9 +18,13 @@
 #   jjasghar
 
 
+add_karma = (subject) ->
+  if karma is not null
+    karma.increment subject.trim().toLowerCase()
+
 
 module.exports = (robot) ->
-        
+
   robot.hear /^!(m|than(k|ks)) (.+)$/i, (msg) ->
     user = msg.match[3]
 
@@ -32,9 +36,11 @@ module.exports = (robot) ->
         ]
 
     msg.send msg.random praise
+    add_karma user
 
   robot.hear /^(!h5|\^5) (.+)$/i, (msg) ->
     user = msg.match[2]
 
     msg.emote "high fives #{user}"
 
+    add_karma user
